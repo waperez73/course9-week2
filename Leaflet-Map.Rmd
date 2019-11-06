@@ -1,0 +1,46 @@
+---
+title: "Course 9 - Week 2 project"
+author: "Wellintton Perez"
+date: "11/5/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE, message=FALSE}
+library(data.table)
+library(leaflet)
+library(dplyr)
+```
+
+## Introduction
+
+I am using the data set for a data analytic project I worked on for a non-profit called
+[Classroom, Inc.](https://www.classroominc.org/) Please check them out they do great work in the less fortunate
+communities accross the USA and the world. The interactive map shows the distribution of student in the United States.  For this map I am only using the United States data.
+
+```{r echo=FALSE, message=FALSE}
+data<-fread("dateset-latlon.csv",sep=",",stringsAsFactors = FALSE,nrows=-1)
+
+top_5_states <- data[order(-data$count)][1:5]
+labels <- c(paste(top_5_states$state,top_5_states$count,sep=": "))
+```
+
+### Classroom, Inc. Student distribution
+
+The map shows the states where Classroom, Inc has affiliated with local schools to allow students to play the games.
+
+- Click on the cluster to drill down on the states
+- You can click on the blue circles to see the number of students in that state
+- The legend shows the top 5 states 
+
+```{r echo=FALSE, message=FALSE}
+data %>%
+  leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers( lat=data$lat, lng=data$lng,popup = c(as.character(data$count)), 
+             clusterOptions =markerClusterOptions()) %>% 
+  addLegend(labels = labels, colors = c("", "", "","",""),title="Top 5 State")
+````
