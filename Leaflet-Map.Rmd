@@ -21,7 +21,7 @@ I am using the data set for a data analytic project I worked on for a non-profit
 [Classroom, Inc.](https://www.classroominc.org/) Please check them out they do great work in the less fortunate
 communities accross the USA and the world. The interactive map shows the distribution of student in the United States.  For this map I am only using the United States data.
 
-```{r echo=FALSE, message=FALSE}
+```{r echo=TRUE, message=FALSE}
 data<-fread("dateset-latlon.csv",sep=",",stringsAsFactors = FALSE,nrows=-1)
 
 top_5_states <- data[order(-data$count)][1:5]
@@ -36,7 +36,7 @@ The map shows the states where Classroom, Inc has affiliated with local schools 
 - You can click on the blue circles to see the number of students in that state
 - The legend shows the top 5 states 
 
-```{r echo=FALSE, message=FALSE}
+```{r echo=TRUE, message=FALSE}
 data %>%
   leaflet() %>%
   addTiles() %>%
