@@ -44,3 +44,4 @@ data %>%
              clusterOptions =markerClusterOptions()) %>% 
   addLegend(labels = labels, colors = c("", "", "","",""),title="Top 5 State")
 ````
+
